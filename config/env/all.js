@@ -10,6 +10,16 @@ module.exports = {
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',
+	apiPath: 'http://api.rentvitals.com/rv',
+    geoclientHost: 'api.cityofnewyork.us',
+    geoclient: {
+        app_id: '42c6b82f',
+        app_key: '03d26d1b654c56e47e5a3f818212c80e'
+    },
+    apiKeys: {
+        app_id: '',
+        app_key: ''
+    },
 	assets: {
 		lib: {
 			css: [

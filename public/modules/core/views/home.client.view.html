@@ -20,12 +20,13 @@
 		    <label class="sr-only" for="exampleInputEmail2">Street</label>
 		    <input type="search" class="form-control" id="exampleInputEmail2" placeholder="Street" ng-model="search.street">
 		  </div>
-		  <select class="form-control">
-		    <option label="Manhattan" value="mn"></option>
-		    <option label="Brooklyn" value="bk">Two</option>
-		    <option label="Queens" value="qn">Five</option>
-		    <option label="Bronx" value="bx">Three</option>
-		    <option label="Staten Island" value="si">Four</option>
+		  <select class="form-control" ng-model="search.borough">
+		  	<option value="" disabled selected>Borough</option>
+		    <option label="Manhattan" value="Manhattan"></option>
+		    <option label="Brooklyn" value="Brooklyn">Two</option>
+		    <option label="Queens" value="Queens">Five</option>
+		    <option label="Bronx" value="Bronx">Three</option>
+		    <option label="Staten Island" value="Staten Island">Four</option>
 		  </select>
 		  <button type="submit" class="btn btn-success" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
 		</form>

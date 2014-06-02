@@ -7,8 +7,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		$scope.authentication = Authentication;
 
 		var validateSearch = function (search) {
-		search.street = search.street.replace(' ', '+');
-		return search;
+			search.street = search.street.replace(' ', '+');
+			return search;
 		};
 
 		$scope.search = function () {
