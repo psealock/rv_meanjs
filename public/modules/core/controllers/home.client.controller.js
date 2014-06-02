@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Buildingservice',
-	function($scope, Authentication , Buildingservice) {
+angular.module('core').controller('HomeController', ['$scope', '$state', 'Authentication', 'Buildingservice',
+	function($scope, $state, Authentication , Buildingservice) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 
@@ -12,6 +12,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		};
 
 		$scope.search = function () {
+			$state.go('building');
 			var search = validateSearch($scope.search),
 				params = {
 					houseNumber: search.houseNumber,
@@ -20,7 +21,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				};
 
 			Buildingservice.getGeoClient(params).then(function (response) {
-				console.log(response);
+				Buildingservice.building = response;
 			});
 		};
 	}

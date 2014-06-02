@@ -1,19 +1,18 @@
 'use strict';
 
-angular.module('core').factory('Buildingservice', ['$http',
+angular.module('core').service('Buildingservice', ['$http',
 	function($http) {
 
-		var building = {};
-		
-		return {
-			getGeoClient: function(params) {
-				return $http.get('/building', {
-					params: params
-				}).then(function (response) {
-					building = response;
-					return response;
-				});
-			}
-		};
+		var BS = this;
+
+		this.building = {};
+
+		this.getGeoClient = function(params) {
+			return $http.get('/building', {
+				params: params
+			}).then(function (response) {
+				return response;
+			});
+		}
 	}
 ]);
