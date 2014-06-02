@@ -13,8 +13,12 @@
 		</div>
 		<form class="form-inline" role="form">
 		  <div class="form-group">
-		    <label class="sr-only" for="exampleInputEmail2">Address</label>
-		    <input type="search" class="form-control" id="exampleInputEmail2" placeholder="Address">
+		    <label class="sr-only" for="exampleInputEmail2">Number</label>
+		    <input type="search" class="form-control" id="exampleInputEmail2" placeholder="Number" ng-model="search.houseNumber">
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputEmail2">Street</label>
+		    <input type="search" class="form-control" id="exampleInputEmail2" placeholder="Street" ng-model="search.street">
 		  </div>
 		  <select class="form-control">
 		    <option label="Manhattan" value="mn"></option>
@@ -23,7 +27,7 @@
 		    <option label="Bronx" value="bx">Three</option>
 		    <option label="Staten Island" value="si">Four</option>
 		  </select>
-		  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+		  <button type="submit" class="btn btn-success" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
 		</form>
 	</div>
 
