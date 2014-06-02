@@ -1,9 +1,30 @@
-.content {
-	margin-top: 50px;
-}
 .undecorated-link:hover {
 	text-decoration: none;
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
+}
+
+.navbar-brand {
+	color: #090d00;
+}
+.navbar-brand:hover {
+	color: #f28729;
+}
+
+.jumbotron {
+	background-color: transparent;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.jumbotron img {
+	margin: 0 auto;
+}
+
+
+
+@media (max-width: 768px) {
+	.jumbotron button {
+		margin-top: 20px;
+	}
 }
