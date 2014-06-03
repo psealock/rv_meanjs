@@ -13,6 +13,7 @@ angular.module('core').controller('HomeController', ['$scope', '$state', 'Authen
 
 		$scope.search = function () {
 			$state.go('building');
+			Buildingservice.status.searching = true;
 			var search = validateSearch($scope.search),
 				params = {
 					houseNumber: search.houseNumber,
@@ -22,6 +23,7 @@ angular.module('core').controller('HomeController', ['$scope', '$state', 'Authen
 
 			Buildingservice.getGeoClient(params).then(function (response) {
 				Buildingservice.building = response;
+				Buildingservice.status.searching = false;
 			});
 		};
 	}

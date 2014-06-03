@@ -6,3 +6,7 @@
 .main-address {
 	text-align: center;
 }
+section .loader {
+	margin: 20% auto 0 auto;
+	display: block;
+}
