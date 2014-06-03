@@ -7,26 +7,27 @@
 	<div class="container-fluid data-container">
 		<div class="col-lg-4">
 			<ul>
-				<li>some</li>
-				<li>good</li>
-				<li>data</li>
-				<li>here</li>
+				<li>Year Built: {{building.allData.pluto[0].YearBuilt}}</li>
+				<li>Number of Floors: {{building.allData.pluto[0].NumFloors}}</li>
+				<li>Zoning: {{building.allData.pluto[0].ZoneDist1}}</li>
+				<li>Residential Area: {{building.allData.pluto[0].ResArea}}</li>
+				<li>Residential Units: {{building.allData.pluto[0].UnitsRes}}</li>
+				<li>Neighborhood: {{building.geoclient.ntaName}}</li>
 			</ul>
 		</div>
 		<div class="col-lg-4">
 			<ul>
-				<li>some</li>
-				<li>good</li>
-				<li>data</li>
-				<li>here</li>
+				<li>Building Borough Lot (BBL): {{building.geoclient.bbl}}</li>
+				<li>Building Identification Number (BIN): {{building.geoclient.buildingIdentificationNumber}}</li>
+				<li>Community District: {{building.geoclient.communityDistrict}}</li>
 			</ul>
 		</div>
 		<div class="col-lg-4">
 			<ul>
-				<li>some</li>
-				<li>good</li>
-				<li>data</li>
-				<li>here</li>
+				<li>Police Precinct: {{building.geoclient.policePrecinct}}</li>
+				<li>Fire Department: Battalion {{building.geoclient.fireBattalion}}, Company {{building.geoclient.fireCompanyNumber}} Division {{building.geoclient.fireDivision}}</li>
+				<li>Hospital Area: {{building.geoclient.healthArea}}</li>
+				<li>School District: not sure where to look</li>
 			</ul>
 		</div>
 	</div>
@@ -44,14 +45,14 @@
 			    	<th>Agency</th>
 			    </tr>
 		    </thead>
-		    <tr>
-		    	<td>Rodents</td>
-		    	<td>shit everywhere</td>
-		    	<td>OPEN</td>
-		    	<td>8/12/14</td>
-		    	<td>n/a</td>
-		    	<td>NYPD</td>
-		    </tr>
+		   	<tr ng-repeat="complaint in building.allData.serviceRequests">
+		   		<td>{{complaint.ComplaintType}}</td>
+		   		<td>{{complaint.Descriptor}}</td>
+		   		<td>{{complaint.Status}}</td>
+		   		<td>{{complaint.CreatedDate}}</td>
+		   		<td>{{complaint.ClosedDate || "n/a"}}</td>
+		   		<td>{{complaint.AgencyName}}</td>
+		   	</tr>
 		  </table>
 		</div>
 	</div>
@@ -62,16 +63,18 @@
 		  	<thead>
 			    <tr>
 			    	<th>Complaint Number</th>
+			    	<th>Category</th>
 			    	<th>Description</th>
 			    	<th>Status</th>
 			    	<th>Open Date</th>
 			    </tr>
 		    </thead>
-		    <tr>
-		    	<td>7777777</td>
-		    	<td>shit everywhere</td>
-		    	<td>OPEN</td>
-		    	<td>8/12/14</td>
+		    <tr ng-repeat="complaint in building.allData.dobComplaints">
+		    	<td>{{complaint.ComplaintNumber}}</td>
+		    	<td>{{complaint.ComplaintCategory}}</td>
+		    	<td>{{complaint.DispositionCode || "none"}}</td>
+		    	<td>{{complaint.Status}}</td>
+		    	<td>{{complaint.DateEntered}}</td>
 		    </tr>
 		  </table>
 		</div>

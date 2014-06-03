@@ -8,8 +8,8 @@ angular.module('buildings').controller('BuildingController', ['$scope', 'Buildin
 	    },                       
     	function(newVal) {
 	        if(newVal) {
-	        	$scope.building = newVal;
-	        	console.log(newVal);
+	        	$scope.building = newVal.data;
+	        	console.log($scope.building);
 	        }
 	    }, true);
 
