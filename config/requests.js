@@ -38,7 +38,11 @@ var env = process.env.NODE_ENV || 'development',
     	'service_requests' : {
     		'path': '/311/',
     		'type': 'api'
-    	}
+    	},
+        'allData': {
+            'path': '/all/',
+            'type': 'api'
+        }
     },
 
     hosts = {

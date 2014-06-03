@@ -28,8 +28,8 @@ var loadGeoClientData = function (action, query, cb) {
     req.end();
 };
 
-var getServiceRequests = function (action, query, cb) {
-    var complaints = '',
+var getAllData = function (action, query, cb) {
+    var allData = '',
         error = null,
         options = requests.options(action, query),
         url = options.host + options.path;
@@ -37,10 +37,10 @@ var getServiceRequests = function (action, query, cb) {
     var req = http.get(url, function (res) {
         res.setEncoding('utf8');
         res.on('data', function(d) {
-            complaints += d;
+            allData += d;
         });
         res.on('end', function () {
-            cb(error, complaints);
+            cb(error, allData);
         });
     });
 
@@ -66,21 +66,22 @@ exports.find = function(req, res) {
         buildingData.geoclient = building.address;
 
         nextQuery = {
-        	'address': encodeURIComponent(houseNumber + ' ' + building.address.boePreferredStreetName),
-        	'borough': borough
+            'address': encodeURIComponent(houseNumber + ' ' + building.address.boePreferredStreetName),
+            'borough': borough,
+            'bin': building.address.buildingIdentificationNumber,
+            'bbl': building.address.bbl
         };
-
         
-        getServiceRequests('service_requests', nextQuery, function (err, service_requests) {
-        	if (err) {
-        		console.log('there was an error: ', err);
-        	}
-        	
-        	service_requests = JSON.parse(service_requests);
+        getAllData('allData', nextQuery, function (err, allData) {
+            if (err) {
+                console.log('there was an error: ', err);
+            }
+            
+            allData = JSON.parse(allData);
 
-        	buildingData.service_requests = service_requests;
+            buildingData.allData = allData;
 
-	        res.send(buildingData);
+            res.send(buildingData);
         });
     });	
 };
