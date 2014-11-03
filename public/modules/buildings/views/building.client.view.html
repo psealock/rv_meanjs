@@ -1,87 +1,94 @@
 <section data-ng-controller="BuildingController">
 	<img class="bldg-img" src="modules/core/img/brand/logo-300.png">
 	<section ng-hide="status.searching">
-		<div class="main-address">
-			<h2>{{building.geoclient.houseNumber}} {{building.geoclient.streetName1In}}, {{building.geoclient.uspsPreferredCityName}} NY {{building.geoclient.zipCode}}</h2>
-		</div>
-		<h2>General Data</h2>
-		<div class="container-fluid data-container">
-			<div class="col-lg-4">
-				<ul>
-					<li>Year Built: {{building.allData.pluto[0].YearBuilt}}</li>
-					<li>Number of Floors: {{building.allData.pluto[0].NumFloors}}</li>
-					<li>Zoning: {{building.allData.pluto[0].ZoneDist1}}</li>
-					<li>Residential Area: {{building.allData.pluto[0].ResArea}}</li>
-					<li>Residential Units: {{building.allData.pluto[0].UnitsRes}}</li>
-					<li>Neighborhood: {{building.geoclient.ntaName}}</li>
-				</ul>
+		<section ng-hide="building.geoclient === 'error'">
+			<div class="main-address">
+				<h2>{{building.geoclient.houseNumber}} {{building.geoclient.streetName1In}}, {{building.geoclient.uspsPreferredCityName}} NY {{building.geoclient.zipCode}}</h2>
 			</div>
-			<div class="col-lg-4">
-				<ul>
-					<li>Building Borough Lot (BBL): {{building.geoclient.bbl}}</li>
-					<li>Building Identification Number (BIN): {{building.geoclient.buildingIdentificationNumber}}</li>
-					<li>Community District: {{building.geoclient.communityDistrict}}</li>
-				</ul>
+			<h2>General Data</h2>
+			<div class="container-fluid data-container">
+				<div class="col-lg-4">
+					<ul>
+						<li>Year Built: {{building.allData.pluto[0].YearBuilt}}</li>
+						<li>Number of Floors: {{building.allData.pluto[0].NumFloors}}</li>
+						<li>Zoning: {{building.allData.pluto[0].ZoneDist1}}</li>
+						<li>Residential Area: {{building.allData.pluto[0].ResArea}}</li>
+						<li>Residential Units: {{building.allData.pluto[0].UnitsRes}}</li>
+						<li>Neighborhood: {{building.geoclient.ntaName}}</li>
+					</ul>
+				</div>
+				<div class="col-lg-4">
+					<ul>
+						<li>Building Borough Lot (BBL): {{building.geoclient.bbl}}</li>
+						<li>Building Identification Number (BIN): {{building.geoclient.buildingIdentificationNumber}}</li>
+						<li>Community District: {{building.geoclient.communityDistrict}}</li>
+					</ul>
+				</div>
+				<div class="col-lg-4">
+					<ul>
+						<li>Police Precinct: {{building.geoclient.policePrecinct}}</li>
+						<li>Fire Department: Battalion {{building.geoclient.fireBattalion}}, Company {{building.geoclient.fireCompanyNumber}} Division {{building.geoclient.fireDivision}}</li>
+						<li>Hospital Area: {{building.geoclient.healthArea}}</li>
+						<li>School District: not sure where to look</li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-lg-4">
-				<ul>
-					<li>Police Precinct: {{building.geoclient.policePrecinct}}</li>
-					<li>Fire Department: Battalion {{building.geoclient.fireBattalion}}, Company {{building.geoclient.fireCompanyNumber}} Division {{building.geoclient.fireDivision}}</li>
-					<li>Hospital Area: {{building.geoclient.healthArea}}</li>
-					<li>School District: not sure where to look</li>
-				</ul>
+			<h2>311 Complaints</h2>
+			<div class="container-fluid data-container">
+				<div class="table-responsive">
+				  <table class="table">
+				  	<thead>
+					    <tr>
+					    	<th>Complaint</th>
+					    	<th>Description</th>
+					    	<th>Status</th>
+					    	<th>Open Date</th>
+					    	<th>Close Date</th>
+					    	<th>Agency</th>
+					    </tr>
+				    </thead>
+				   	<tr ng-repeat="complaint in building.allData.serviceRequests">
+				   		<td>{{complaint.ComplaintType}}</td>
+				   		<td>{{complaint.Descriptor}}</td>
+				   		<td>{{complaint.Status}}</td>
+				   		<td>{{complaint.CreatedDate}}</td>
+				   		<td>{{complaint.ClosedDate || "n/a"}}</td>
+				   		<td>{{complaint.AgencyName}}</td>
+				   	</tr>
+				  </table>
+				</div>
 			</div>
-		</div>
-		<h2>311 Complaints</h2>
-		<div class="container-fluid data-container">
-			<div class="table-responsive">
-			  <table class="table">
-			  	<thead>
-				    <tr>
-				    	<th>Complaint</th>
-				    	<th>Description</th>
-				    	<th>Status</th>
-				    	<th>Open Date</th>
-				    	<th>Close Date</th>
-				    	<th>Agency</th>
+			<h2>DoB Complaints</h2>
+			<div class="container-fluid data-container">
+				<div class="table-responsive">
+				  <table class="table">
+				  	<thead>
+					    <tr>
+					    	<th>Complaint Number</th>
+					    	<th>Category</th>
+					    	<th>Description</th>
+					    	<th>Status</th>
+					    	<th>Open Date</th>
+					    </tr>
+				    </thead>
+				    <tr ng-repeat="complaint in building.allData.dobComplaints">
+				    	<td>{{complaint.ComplaintNumber}}</td>
+				    	<td>{{complaint.ComplaintCategory}}</td>
+				    	<td>{{complaint.DispositionCode || "none"}}</td>
+				    	<td>{{complaint.Status}}</td>
+				    	<td>{{complaint.DateEntered}}</td>
 				    </tr>
-			    </thead>
-			   	<tr ng-repeat="complaint in building.allData.serviceRequests">
-			   		<td>{{complaint.ComplaintType}}</td>
-			   		<td>{{complaint.Descriptor}}</td>
-			   		<td>{{complaint.Status}}</td>
-			   		<td>{{complaint.CreatedDate}}</td>
-			   		<td>{{complaint.ClosedDate || "n/a"}}</td>
-			   		<td>{{complaint.AgencyName}}</td>
-			   	</tr>
-			  </table>
+				  </table>
+				</div>
 			</div>
-		</div>
-		<h2>DoB Complaints</h2>
-		<div class="container-fluid data-container">
-			<div class="table-responsive">
-			  <table class="table">
-			  	<thead>
-				    <tr>
-				    	<th>Complaint Number</th>
-				    	<th>Category</th>
-				    	<th>Description</th>
-				    	<th>Status</th>
-				    	<th>Open Date</th>
-				    </tr>
-			    </thead>
-			    <tr ng-repeat="complaint in building.allData.dobComplaints">
-			    	<td>{{complaint.ComplaintNumber}}</td>
-			    	<td>{{complaint.ComplaintCategory}}</td>
-			    	<td>{{complaint.DispositionCode || "none"}}</td>
-			    	<td>{{complaint.Status}}</td>
-			    	<td>{{complaint.DateEntered}}</td>
-			    </tr>
-			  </table>
+			<h2>Permits</h2>
+			<p>Coming Soon...</p>
+		</section>
+		<section ng-show="building.geoclient === 'error'">
+			<div class="jumbotron text-center">
+				<h2>Unable to find address</h2>
 			</div>
-		</div>
-		<h2>Permits</h2>
-		<p>Coming Soon...</p>
+		</section>
 	</section>
 	<section ng-show="status.searching">
 		<img class="loader" src="modules/core/img/loaders/loader.gif">

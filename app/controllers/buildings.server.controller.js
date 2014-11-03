@@ -49,6 +49,23 @@ var getAllData = function (action, query, cb) {
     });
 };
 
+var geoclientErrorHandling = function (building) {
+    // var errors = [
+    //     building.address.message,
+    //     building.address.message2,
+    //     building.message
+    // ];
+    // for (var i = 0; i < errors.length; i ++) {
+    //     if(errors[i]) {
+    //         return true;
+    //     }
+    // }
+    if(building.address.message || building.address.message2 || building.message) {
+        return true;
+    }
+    return false;
+};
+
 exports.find = function(req, res) {
 	var buildingData = {},
 	
@@ -62,6 +79,12 @@ exports.find = function(req, res) {
         }
         
         building = JSON.parse(building);
+        console.log(building);
+
+        if(geoclientErrorHandling(building)) {
+            buildingData.geoclient = 'error';
+            res.send(buildingData);
+        }
 
         buildingData.geoclient = building.address;
 
